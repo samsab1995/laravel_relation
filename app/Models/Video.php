@@ -4,21 +4,22 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Post extends Model
+class Video extends Model
 {
     use HasFactory;
 
-    public function comments(): MorphMany
+    public function lesson(): BelongsTo
     {
-        return $this->morphMany(Comment::class,'commentable');
+        return $this->belongsTo(Lesson::class);
     }
 
-    public function images(): MorphMany
+    public function comments(): MorphMany
     {
-        return $this->morphMany(Image::class,'imageable');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function tags(): MorphToMany

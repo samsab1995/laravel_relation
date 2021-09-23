@@ -4,21 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Post extends Model
+class Lesson extends Model
 {
     use HasFactory;
 
-    public function comments(): MorphMany
+    public function videos(): HasMany
     {
-        return $this->morphMany(Comment::class,'commentable');
+        return $this->hasMany(Video::class);
     }
 
-    public function images(): MorphMany
+    public function podcasts(): HasMany
     {
-        return $this->morphMany(Image::class,'imageable');
+        return $this->hasMany(Podcast::class);
     }
 
     public function tags(): MorphToMany
